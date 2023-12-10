@@ -25,7 +25,11 @@ def unix_time_millis(dt):
 
     
 def get_refresh_token_text_file():
-    with open(r"Z:\automate_investing\handling_tokens\refresh_token.txt", "r") as f:
+
+    script_dir = os.path.dirname(os.path.abspath(__file__))    
+    file_path = os.path.join(script_dir, 'refresh_token.txt')
+
+    with open(file_path, "r") as f:
         refresh_token = f.read().strip()
     return refresh_token
 
@@ -58,12 +62,17 @@ def getting_access_token_every_30(refresh_token):
     print("")
     print("")
     
-    
-    
-    if os.path.exists(r"Z:\automate_investing\handling_tokens\access_token.txt"):
-        os.remove(r"Z:\automate_investing\handling_tokens\access_token.txt")
 
-    with open(r"Z:\automate_investing\handling_tokens\access_token.txt", "w") as f:
+
+
+    script_dir = os.path.dirname(os.path.abspath(__file__))    
+    file_path = os.path.join(script_dir, 'access_token.txt')
+
+    
+    if os.path.exists(file_path):
+        os.remove(file_path)
+
+    with open(file_path, "w") as f:
         f.write(access_token) 
 
     time.sleep(5)
